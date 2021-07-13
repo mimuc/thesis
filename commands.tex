@@ -1,0 +1,49 @@
+% DE: wird fuer Tabellen benötigt (z.B. >{centering\RBS}p{2.5cm} erzeugt einen zentrierten 2,5cm breiten Absatz in einer Tabelle
+\newcommand{\RBS}{\let\\=\tabularnewline}
+
+% EN: To avoid issues with Springer's \mathplus
+%     See also http://tex.stackexchange.com/q/212644/9075
+\providecommand\mathplus{+}
+
+% DE: typoraphisch richtige Abkürzungen
+\newcommand{\zB}{z.\,B.\xspace}
+\newcommand{\bzw}{bzw.\xspace}
+\newcommand{\usw}{usw.\xspace}
+\renewcommand{\dh}{d.\,h.\xspace}
+
+% EN: from hmks makros.tex - \indexify
+\newcommand{\toindex}[1]{\index{#1}#1}
+
+% DE: Tipp aus "The Comprehensive LaTeX Symbol List"
+\newcommand{\dotcup}{\ensuremath{\,\mathaccent\cdot\cup\,}}
+
+% DE: Anstatt $|x|$ $\abs{x}$ verwenden.
+%     Die Betragsstriche skalieren automatisch, falls "x" etwas größer sein sollte...
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+
+% DE: für Zitate
+\newcommand{\citeS}[2]{\cite[S.~#1]{#2}}
+\newcommand{\citeSf}[2]{\cite[S.~#1\,f.]{#2}}
+\newcommand{\citeSff}[2]{\cite[S.~#1\,ff.]{#2}}
+\newcommand{\vgl}{vgl.\ }
+\newcommand{\Vgl}{Vgl.\ }
+
+% EN: For the algorithmic package
+\newcommand{\commentchar}{\ensuremath{/\mkern-4mu/}}
+\algrenewcommand{\algorithmiccomment}[1]{\hfill $\commentchar$ #1}
+
+% DE: Seitengrößen - Gegen Schusterjungen und Hurenkinder...
+\newcommand{\largepage}{\enlargethispage{\baselineskip}}
+\newcommand{\shortpage}{\enlargethispage{-\baselineskip}}
+
+\newcommand{\initialism}[1]{%
+  \ifdeutsch%
+    \textsc{#1}\xspace%
+  \else%
+    \textlcc{#1}\xspace%
+  \fi%
+}
+\newcommand{\OMG}{\initialism{OMG}}
+\newcommand{\BPEL}{\initialism{BPEL}}
+\newcommand{\BPMN}{\initialism{BPMN}}
+\newcommand{\UML}{\initialism{UML}}

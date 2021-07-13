@@ -1,0 +1,406 @@
+\NeedsTeXFormat{LaTeX2e}
+\newcommand{\USCCover@Pgkname}{lmu-thesis-cover}
+\ProvidesPackage{\USCCover@Pgkname}[2021/05/01 Cover and affirmation for scientific works.]
+\typeout{Package: `\USCCover@Pgkname' v0.0.1}
+% ------------------------------
+% required packages
+% ------------------------------
+% kvoptions for key value options support
+\RequirePackage{kvoptions}
+\RequirePackage{ifthen}
+\RequirePackage{doclicense}
+
+% this package requires utf8 inputenc
+\def\USCCover@utf8warning{\PackageWarningNoLine{\USCCover@Pgkname}
+    {This package requires UTF-8 support.\MessageBreak
+        If at pdflatex, load `inputenc' or `inputenx' with the `utf8' option}%
+}
+
+\newif\ifinputencloaded
+
+\@ifpackageloaded{inputenx}
+{\def\USCCover@tempa{inputenx}\inputencloadedtrue}
+{\@ifpackageloaded{inputenc}{\def\USCCover@tempa{inputenc}\inputencloadedtrue}{\inputencloadedfalse}}
+\ifinputencloaded
+    \@ifpackagewith{\USCCover@tempa}{utf8}{}{\USCCover@utf8warning}
+    %We also drop utf8x, as we believe that this is obsolete - see http://tex.stackexchange.com/questions/13067/utf8x-vs-utf8-inputenc
+    \@ifpackagewith{\USCCover@tempa}{utf8x}{\USCCover@utf8warning}{}
+\else
+    \ifluatex
+        %no warning required
+    \else
+        \USCCover@utf8warning
+    \fi
+\fi
+
+% ------------------------------
+% options
+% ------------------------------
+\SetupKeyvalOptions{
+    family=MCS,
+    prefix=MCS@
+}
+
+% for possible option values see README.md
+\DeclareStringOption[title not set]{title} % Title of the work
+\DeclareStringOption[author not set]{author}
+\DeclareStringOption[author email not set]{email}
+\DeclareStringOption[bachelor]{type}
+\DeclareStringOption[fac]{institute}
+\DeclareStringOption[cs]{course}
+\DeclareStringOption[examiner not set]{examiner}
+\DeclareStringOption[supervisor not set]{supervisor}
+\DeclareStringOption[startdate not set]{startdate}
+\DeclareStringOption[enddate not set]{enddate}
+\DeclareStringOption[standard]{covertype} % type of the coverpage: standard, ustuttdiss
+\DeclareStringOption[ccsa]{copyright}
+
+\DeclareStringOption[german]{language}
+\DeclareBoolOption[false]{setPageNumberToOne}
+\DeclareBoolOption[false]{setCoverPageNumberToMinusOne}
+
+% ------------------------------
+% process options
+% ------------------------------
+\ProcessKeyvalOptions*
+
+% ------------------------------
+% define language specific labels:
+% ------------------------------
+% - labels are defined separate for each language
+% - if language is not set, German is used
+% ------------------------------
+\def\labelsenglish{
+    \gdef\@labelExaminer{Examiner}%
+    %\gdef\@labelprueferin{Examiner}%
+    \gdef\@labelSupvervisor{Supervisor}%
+    %\gdef\@labelbetreuerin{Supervisor}%
+    \gdef\@labelCourse{Course of Study}%
+    \gdef\@labelStartdate{Commenced}%
+    \gdef\@labelEnddate{Completed}%
+    \gdef\@labelUniversity{~\newline LMU Munich}%
+    \gdef\@labelDept{Faculty of Computer Science}%
+
+    %the labels are written in German, because these are the official terms given by the regulations ("Prüfungsordnung")
+    %For a detailed discussion see https://github.com/latextemplates/uni-stuttgart-computer-science-cover/pull/10
+    \gdef\@labelTypeStudy{Studienarbeit}%
+    \gdef\@labelTypeDiplom{Diplomarbeit}%
+    \gdef\@labelTypeBachelor{Bachelorarbeit}%
+    \gdef\@labelTypeMaster{Masterarbeit}%
+    \gdef\@labelTypeProjectINF{Projekt-INF}%
+    \gdef\@labelTypeFachstudie{Fachstudie}%
+    \gdef\@labelTypeProzessanalyse{Prozessanalyse}%
+
+    \gdef\@labelCourseCS{Informatik}%
+    \gdef\@labelCourseSE{Softwaretechnik}%
+    \gdef\@labelCourseMCL{Computerlinguistik}%
+    \gdef\@labelCourseTK{Technische Kybernetik}%
+    \gdef\@labelCourseMSV{Maschinelle Sprachverarbeitung}%
+    \gdef\@labelCourseBIS{Wirtschaftsinformatik}%
+    \gdef\@labelCourseSimTech{Simulation Technology}%
+    \gdef\@labelCourseMedInf{Medieninformatik}%
+
+    \gdef\@labelAffirmation{Declaration}%
+    \gdef\@AffirmationText{I hereby declare that the work presented in this thesis is entirely my own and that
+        I did not use any other sources and references than the listed ones.
+        I have marked all direct or indirect statements from other sources contained therein as quotations.
+        Neither this work nor significant parts of it were part of another examination procedure.
+        I have not published this work in whole or in part before.
+        The electronic copy is consistent with all submitted copies.
+    }
+    \gdef\@labelSignature{\ place, date, signature}
+}
+
+\def\labelsgerman{
+    \gdef\@labelExaminer{Prüfer/in}%
+    \gdef\@labelSupvervisor{Betreuer/in}%
+    \gdef\@labelCourse{Studiengang}%
+    \gdef\@labelStartdate{Beginn am}%
+    \gdef\@labelEnddate{Beendet am}%
+    \gdef\@labelUniversity{~\newline Ludwig-Maximilians-Universität München}%
+    \gdef\@labelDept{Fakultät Informatik, Elektrotechnik und Informationstechnik}%
+
+    \gdef\@labelTypeStudy{Studienarbeit}%
+    \gdef\@labelTypeDiplom{Diplomarbeit}%
+    \gdef\@labelTypeBachelor{Bachelorarbeit}%
+    \gdef\@labelTypeMaster{Masterarbeit}%
+    \gdef\@labelTypeProjectINF{Projekt-INF}%
+    \gdef\@labelTypeFachstudie{Fachstudie}%
+    \gdef\@labelTypeProzessanalyse{Prozessanalyse}%
+
+    \gdef\@labelCourseCS{Informatik}%
+    \gdef\@labelCourseSE{Softwaretechnik}%
+    \gdef\@labelCourseMCL{Computerlinguistik}%
+    \gdef\@labelCourseTK{Technische Kybernetik}%
+    \gdef\@labelCourseMSV{Maschinelle Sprachverarbeitung}%
+    \gdef\@labelCourseBIS{Wirtschaftsinformatik}%
+    \gdef\@labelCourseSimTech{Simulation Technology}%
+    \gdef\@labelCourseMedInf{Medieninformatik}%
+
+    \gdef\@labelAffirmation{Erklärung}%
+    \gdef\@AffirmationText{%
+        Ich versichere, diese Arbeit selbstständig verfasst zu haben.
+        Ich habe keine anderen als die angegebenen Quellen benutzt und alle wörtlich oder sinngemäß aus anderen Werken übernommene Aussagen als solche gekennzeichnet.
+        Weder diese Arbeit noch wesentliche Teile daraus waren bisher Gegenstand eines anderen Prüfungsverfahrens.
+        Ich habe diese Arbeit bisher weder teilweise noch vollständig veröffentlicht.
+        Das elektronische Exemplar stimmt mit allen eingereichten Exemplaren überein.
+    }
+    \gdef\@labelSignature{\ Ort, Datum, Unterschrift}
+}
+
+% set those labels according to the set language
+\newcommand{\USCCover@setLanguage}{
+    \def\0{english}
+    \ifx\MCS@language\0
+        \labelsenglish
+    \else
+        \labelsgerman
+    \fi
+}
+
+% set \@labelType if matched
+\newcommand{\USCCover@setType}{
+    \gdef\@labelType{\MCS@type}
+    \def\1{\MCS@type}
+    % dont remove last two braces / empty else clause
+    \def\0{diplom}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelType{\@labelTypeDiplom}}{}
+    \def\0{study}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelType{\@labelTypeStudy}}{}
+    \def\0{bachelor}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelType{\@labelTypeBachelor}}{}
+    \def\0{master}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelType{\@labelTypeMaster}}{}
+    \def\0{fachstudie}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelType{\@labelTypeFachstudie}}{}
+    \def\0{projectinf}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelType{\@labelTypeProjectINF}}{}
+    \def\0{prozessanalyse}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelType{\@labelTypeProzessanalyse}}{}
+}
+
+% ------------------------------
+% Institute addresses
+% ------------------------------
+
+% general university address
+\gdef\@labelAddress{\@labelUniversity\\Frauenlobstraße 7a\\D--80336 München}
+
+\newcommand{\USCCover@setInstitute}{
+    % use specified text if institute does not match
+    \gdef\@labelInstitute{\MCS@institute}
+
+    \def\1{\MCS@institute}
+}
+
+% ------------------------------
+% Evaluate course option and set course
+% ------------------------------
+\newcommand{\USCCover@setCourse}{
+    % use specified text if course does not match
+    \gdef\@labelCourseValue{\MCS@course}
+
+    \def\1{\MCS@course}
+    % dont remove last two braces / empty else clause
+    \def\0{cs}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCourseValue{\@labelCourseCS}}{}
+    \def\0{se}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCourseValue{\@labelCourseSE}}{}
+    \def\0{mcl}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCourseValue{\@labelCourseMCL}}{}
+    \def\0{msv}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCourseValue{\@labelCourseMSV}}{}
+    \def\0{bis}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCourseValue{\@labelCourseBIS}}{}
+    \def\0{simtech}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCourseValue{\@labelCourseSimTech}}{}
+    \def\0{medinf}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCourseValue{\@labelCourseMedInf}}{}
+
+}
+
+\gdef\@labelCopyrightCCSA{
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 License (CC BY-SA 4.0): \url{http://creativecommons.org/licenses/by-sa/4.0/}\\
+    \ccbysa
+}%
+
+\gdef\@labelCopyrightCCNoSA{
+    This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0): \url{https://creativecommons.org/licenses/by-nc-sa/4.0/}\\
+    \ccbyncsa
+}%
+
+\gdef\@labelCopyrightCCZERO{
+    This work is licensed under a Creative Commons 0 1.0 License (CC0): \url{https://creativecommons.org/publicdomain/zero/1.0/}\\
+    \cczero
+}%
+
+% set \@labelCopyright if matched
+\newcommand{\USCCover@setCopyright}{
+    \gdef\@labelCopyright{\MCS@copyright}
+
+    \def\1{\MCS@copyright}
+    % dont remove last two braces / empty else clause
+    \def\0{ccbysa}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCopyright{\@labelCopyrightCCSA}}{}
+    \def\0{ccbynosa}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCopyright{\@labelCopyrightCCNoSA}}{}
+    \def\0{cc0}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCopyright{\@labelCopyrightCCZERO}}{}
+    \def\0{none}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCopyright{}}{}
+}
+
+% ------------------------------
+% evaluate options by calling those functions that set text accordingly
+% ------------------------------
+\USCCover@setLanguage
+\USCCover@setType
+\USCCover@setInstitute
+\USCCover@setCourse
+\USCCover@setCopyright
+
+% ------------------------------
+% helping commands
+% ------------------------------
+% - \USCCover@umrandet
+% - \USCCover@TBlabel
+% - \USCCover@TBlist
+% ------------------------------
+\def\USCCover@umrandet{\global\let\@USCCover@umrandet=\fbox}
+\let\@USCCover@umrandet\relax
+
+\newcommand{\USCCover@TBlabel}[1]{\textbf{#1}\hfil}
+
+\newenvironment{USCCover@TBlist}{%
+    \list{}{\labelwidth 45mm \leftmargin 70mm % alt: 35/60 mm
+        \rightmargin 20mm \let\makelabel\USCCover@TBlabel}%
+}{\endlist}
+
+% ------------------------------
+% usable commands
+% ------------------------------
+% - \Coverpage
+% - \Versicherung
+% (contain code from old diplomtitel.sty)
+% ------------------------------
+\newcommand{\Coverpage}{%
+    \cleardoublepage
+    \ifthenelse{\boolean{MCS@setCoverPageNumberToMinusOne}}{\setcounter{page}{-1}}{}
+    \begingroup
+    \newcommand{\USCCover@isTwoColumn}{false}
+    \if@twocolumn \renewcommand{\USCCover@isTwoColumn}{true} \onecolumn \fi
+    \sffamily
+    \pagestyle{empty}%
+    \thispagestyle{empty}%
+    %\fontfamily{ppl}\selectfont
+    %
+    \@normalsize \@setsize\normalsize{13.6pt}\xipt\@xipt
+
+    %
+    \frenchspacing    % besser, da viele Abk. (<- da ist schon eine)
+    \parskip=0pt\parindent=0pt\null
+    %
+    % Damit alles richtig funktioniert, mu"s der Ursprung auf die
+    % tats"achliche linke obere Ecke des Blattes gelegt werden (ohne den
+    % bekannten 1in Offset also).
+    % Ausserdem werden die beiden Seitenr"ander auf 28mm + 4.5mm Falz
+    % gesetzt, die Seitenh"ohe auf DIN A4-H"ohe.
+    %
+    \hsize=154mm       %% DIN A4: 210mm - 2*28mm
+    \columnwidth=\hsize \linewidth=\hsize
+    %
+    \dimen0=0pt
+    \advance\dimen0-\oddsidemargin
+    \advance\dimen0 2.6mm %%
+    \advance\dimen0 4.5mm %%
+    \hbox to 0pt{\kern\dimen0\vbox to\topskip{%
+                \dimen0=-1in
+                \advance\dimen0-\topmargin
+                \advance\dimen0-\headheight
+                \advance\dimen0-\headsep
+                \vskip\dimen0\relax
+                %
+
+
+                \vskip 20mm\relax %%%
+
+                \vbox to 70mm{
+                        \begin{center}%
+                            \@labelAddress
+                            \@labelInstitute
+                        \end{center}
+                        \vfill}%
+
+                \vskip -4mm\relax
+                %%% Box 100mm width und 80mmm height
+                \centerline{\fboxsep=0pt
+                    \@USCCover@umrandet{\hbox to 120mm{\hfil
+                                \vbox to 80mm{\hsize=95mm\parindent=0pt
+                                        \vskip 10mm plus 30mm minus 7.5mm
+                                        \begin{center}
+                                            \large\@labelType
+                                        \end{center}%
+                                        \vskip 10mm plus 10mm minus 10mm
+                                        \begin{center}
+                                            \Huge\textbf{\MCS@title}
+                                        \end{center}%
+                                        \vskip 20mm plus 20mm minus 7.5mm
+                                        \begin{center}
+                                            \@setfontsize\Large{20}{20}\MCS@author
+                                        \end{center}%
+                                        \begin{center}
+                                            \MCS@email
+                                        \end{center}%
+                                        \vskip 17.5mm plus 35mm minus 12.5mm}\hfil}}}%
+                \vskip 20mm %%%%%
+
+                \vbox to 15mm{%
+                        \begin{USCCover@TBlist}%
+                            \item[\@labelCourse: ]\@labelCourseValue
+                        \end{USCCover@TBlist}%
+                        \vfill}%
+                \vbox to 45mm{%
+                        \begin{USCCover@TBlist}%
+                            \item[\@labelExaminer:]\MCS@examiner
+                            \item[\@labelSupvervisor:]\MCS@supervisor
+                        \end{USCCover@TBlist}%
+                        \vfill}%
+                \vbox to 70mm{%%%%% ==> 85 mm from the top
+                        \begin{USCCover@TBlist}%
+                            \item[\@labelStartdate:]\MCS@startdate
+                            \item[\@labelEnddate:]\MCS@enddate
+                        \end{USCCover@TBlist}%
+                        \vfill}%
+                \vss}\hss}%
+    %
+    \thispagestyle{empty}%
+    \newpage 
+    % set counter to start at 1 after the clear(double)page
+    \ifthenelse{\boolean{MCS@setPageNumberToOne}}{\setcounter{page}{1}}{}
+    \newcommand{\USCCover@true}{true}
+    \ifthenelse{\equal{\USCCover@isTwoColumn}{\USCCover@true}}{\twocolumn}{}
+    \endgroup
+}
+
+\newcommand{\Affirmation}{
+    \cleardoublepage
+    \providecommand{\USCCover@isTwoColumn}{}
+    \if@twocolumn \renewcommand{\USCCover@isTwoColumn}{true} \onecolumn
+        \else \renewcommand{\USCCover@isTwoColumn}{false} \fi
+    \null
+    \vskip 5cm\relax
+    \begin{center}
+        \begin{minipage}[t]{10cm}
+            \hbox{\textbf{\@labelAffirmation}}%
+            \vskip 1cm\relax
+            %\begin{flushleft}%
+            \@AffirmationText
+            %\end{flushleft}%
+            \vskip 4cm\relax
+            \hrulefill
+            \vskip .4\baselineskip
+            \hbox{\@labelSignature}
+        \end{minipage}
+    \end{center}
+    \clearpage
+    \providecommand{\USCCover@true}{true}
+    \ifthenelse{\equal{\USCCover@isTwoColumn}{\USCCover@true}}{\twocolumn}{}
+}
+
+
+\newcommand{\Copyright}
+{
+    \small\flushleft\enquote{\MCS@title }\\
+    \today
+    \vfill
+    % Urheberrechtshinweis
+    \copyright{} \the\year\ \MCS@author \\ [0.5em]
+    \@labelCopyright\\
+    \vspace{1em}
+    Typesetting: PDF-\LaTeXe{}\\
+    \thispagestyle{empty}
+    \newpage
+
+}
