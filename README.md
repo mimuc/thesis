@@ -1,7 +1,5 @@
 # LMU Media Informatics Group Thesis Template
 
-> This template is a general template for scientific theses.
-
 Currently, it is the unofficial LaTeX template for Master, Bachelor, Diploma, and Student Theses.
 
 See [docs/](docs/) or <http://mimuc.github.io/thesis-template/> for a documentation of the template.
