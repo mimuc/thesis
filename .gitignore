@@ -1,6 +1,6 @@
 .DS_Store
 
-main-*.pdf
+main*.pdf
 graphics/*.pdf_tex
 democode.tex
 
