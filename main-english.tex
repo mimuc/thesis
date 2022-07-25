@@ -135,26 +135,37 @@
 \listoffigures
 \listoftables
 
+% Control List of Listings
+\let\iflistings\iffalse
 %Wird nur bei Verwendung von der lstlisting-Umgebung mit dem "caption"-Parameter benoetigt
 %\lstlistoflistings
 %ansonsten:
-\ifdeutsch
-  \listof{Listing}{Verzeichnis der Listings}
-\else
-  \listof{Listing}{List of Listings}
+\iflistings
+  \ifdeutsch
+    \listof{Listing}{Verzeichnis der Listings}
+  \else
+    \listof{Listing}{List of Listings}
+  \fi
 \fi
 
-%mittels \newfloat wurde die Algorithmus-Gleitumgebung definiert.
-%Mit folgendem Befehl werden alle floats dieses Typs ausgegeben
-\ifdeutsch
-  \listof{Algorithmus}{Verzeichnis der Algorithmen}
-\else
-  \listof{Algorithmus}{List of Algorithms}
+% Control List of Algorithms
+\let\ifalgorithms\iffalse
+\ifalgorithms
+  %mittels \newfloat wurde die Algorithmus-Gleitumgebung definiert.
+  %Mit folgendem Befehl werden alle floats dieses Typs ausgegeben
+  \ifdeutsch
+    \listof{Algorithmus}{Verzeichnis der Algorithmen}
+  \else
+    \listof{Algorithmus}{List of Algorithms}
+  \fi
+  %\listofalgorithms %Ist nur für Algorithmen, die mittels \begin{algorithm} umschlossen werden, nötig
 \fi
-%\listofalgorithms %Ist nur für Algorithmen, die mittels \begin{algorithm} umschlossen werden, nötig
 
-% Abkürzungsverzeichnis
-\printnoidxglossaries
+% Control Glossary
+\let\ifglossary\iffalse
+\ifglossary
+  \printnoidxglossaries
+\fi
 
 \iftex4ht
 \else
@@ -217,25 +228,51 @@
 
 
 \chapter{Introduction}
+\label{sec:introduction}
 
-This thesis starts with \cref{chap:k2}.
+This is a typical human-computer interaction thesis structure for an introduction which is structured in four paragraphs as follows:
+% First Paragraph
+% CORE MESSAGE OF THIS PARAGRAPH:
+\todo{P1.1. What is the large scope of the problem?}
+\todo{P1.2. What is the specific problem?}
 
-We can also typeset \verb|<text>verbatim text</text>|.
-Backticks are also rendered correctly: \verb|`words in backticks`|.
+% Second Paragraph
+% CORE MESSAGE OF THIS PARAGRAPH:
+\todo{P2.1. The second paragraph should be about what have others been doing}
+\todo{P2.2. Why is the problem important? Why was this work carried out?}
 
-\chapter{Chapter Two}
-\label{chap:k2}
+% Third Paragraph
+% CORE MESSAGE OF THIS PARAGRAPH:
+\todo{P3.1. What have you done?}
+\todo{P3.2. What is new about your work?}
+
+% Fourth paragraph
+% CORE MESSAGE OF THIS PARAGRAPH:
+\todo{P4.1. What did you find out? What are the concrete results?}
+\todo{P4.2. What are the implications? What does this mean for the bigger picture?}
 
 LaTeX hints are provided in \cref{chap:latexhints}.
-
-\blinddocument
 
 \chapter{Related Work}
 
 Describe relevant scientific literature related to your work.
 
-\chapter{Conclusion and Outlook}
-\label{chap:zusfas}
+\chapter{Study Design}
+
+\section{Apparatus}
+
+\section{Procedure}
+
+\section{Measurements}
+
+\section{Participants}
+
+\chapter{Results}
+
+\chapter{Discussion}
+
+\chapter{Conclusion}
+\label{sec:zusfas}
 
 \section*{Outlook}
 
