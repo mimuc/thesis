@@ -58,7 +58,6 @@
 \DeclareStringOption[enddate not set]{enddate}
 \DeclareStringOption[standard]{covertype} % type of the coverpage: standard, ustuttdiss
 \DeclareStringOption[ccsa]{copyright}
-
 \DeclareStringOption[german]{language}
 \DeclareBoolOption[false]{setPageNumberToOne}
 \DeclareBoolOption[false]{setCoverPageNumberToMinusOne}
@@ -320,8 +319,8 @@
                 \vskip -4mm\relax
                 %%% Box 100mm width und 80mmm height
                 \centerline{\fboxsep=0pt
-                    \@USCCover@umrandet{\hbox to 120mm{\hfil
-                                \vbox to 80mm{\hsize=95mm\parindent=0pt
+                    \@USCCover@umrandet{\hbox to 160mm{\hfil
+                                \vbox to 80mm{\hsize=160mm\parindent=0pt
                                         \vskip 10mm plus 30mm minus 7.5mm
                                         \begin{center}
                                             \large\@labelType
