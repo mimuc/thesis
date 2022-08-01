@@ -416,13 +416,13 @@
 
 
 % EN: Enable typesetting values with SI units.
-\ifdeutsch
-  \usepackage[mode=text,group-four-digits]{siunitx}
-  \sisetup{locale=DE}
-\else
-  \usepackage[mode=text,group-four-digits,group-separator={,}]{siunitx}
-  \sisetup{locale=US}
-\fi
+%\ifdeutsch
+%  \usepackage[mode=text,group-four-digits]{siunitx}
+%  \sisetup{locale=DE}
+%\else
+%  \usepackage[mode=text,group-four-digits,group-separator={,}]{siunitx}
+%  \sisetup{locale=US}
+%\fi
 
 
 % EN: Extensions for tables
@@ -704,13 +704,15 @@
   \renewcommand*{\finalnamedelim}{\addcomma\space}%
 }
 
-\DefineBibliographyStrings{ngerman}{
-  backrefpage  = {zitiert auf S\adddot},
-  backrefpages = {zitiert auf S\adddot},
-  andothers    = {et\ \addabbrvspace al\adddot},
-  %Tipp von http://www.mrunix.de/forums/showthread.php?64665-biblatex-Kann-%DCberschrift-vom-Inhaltsverzeichnis-nicht-%E4ndern&p=293656&viewfull=1#post293656
-  bibliography = {Literaturverzeichnis}
-}
+\ifdeutsch
+  \DefineBibliographyStrings{ngerman}{
+    backrefpage  = {zitiert auf S\adddot},
+    backrefpages = {zitiert auf S\adddot},
+    andothers    = {et\ \addabbrvspace al\adddot},
+    %Tipp von http://www.mrunix.de/forums/showthread.php?64665-biblatex-Kann-%DCberschrift-vom-Inhaltsverzeichnis-nicht-%E4ndern&p=293656&viewfull=1#post293656
+    bibliography = {Literaturverzeichnis}
+  }
+\fi
 
 % EN: enable hyperlinked author names when using \citeauthor
 %     source: http://tex.stackexchange.com/a/75916/9075
@@ -788,6 +790,15 @@
   citecolor=black
 }
 
+\ifenglish
+    %\renewcommand{\sectionautorefname}{Section}
+    %\renewcommand{\subsectionautorefname}{Section}
+    %\renewcommand{\subsubsectionautorefname}{Section}
+    \defcaptionname*{english}{\chapterautorefname}{Chapter}
+    \defcaptionname*{english}{\sectionautorefname}{Section}
+    \defcaptionname*{english}{\subsectionautorefname}{Section}
+    \defcaptionname*{english}{\subsubsectionautorefname}{Section}
+
 
 % EN: Abbreviations - has to be loaded after hyperref
 % DE: Abkürzungsverzeichnis - muss nach hyperref geladen werden
@@ -812,28 +823,28 @@
 
 % EN: Extensions for references inside the document (\cref{fig:sample}, ...)
 % DE: cleveref für cref statt autoref, da cleveref auch bei Definitionen funktioniert
-\usepackage[capitalise,nameinlink,noabbrev]{cleveref}
-\ifdeutsch
-  \crefname{table}{Tabelle}{Tabellen}
-  \Crefname{table}{Tabelle}{Tabellen}
-  \crefname{figure}{\figurename}{\figurename}
-  \Crefname{figure}{Abbildung}{Abbildungen}
-  \crefname{equation}{Gleichung}{Gleichungen}
-  \Crefname{equation}{Gleichung}{Gleichungen}
-  \crefname{theorem}{Theorem}{Theoreme}
-  \Crefname{theorem}{Theorem}{Theoreme}
-  \crefname{listing}{\lstlistingname}{\lstlistingname}
-  \Crefname{listing}{Listing}{Listings}
-  \crefname{section}{Abschnitt}{Abschnitte}
-  \Crefname{section}{Abschnitt}{Abschnitte}
-  \crefname{paragraph}{Abschnitt}{Abschnitte}
-  \Crefname{paragraph}{Abschnitt}{Abschnitte}
-  \crefname{subparagraph}{Abschnitt}{Abschnitte}
-  \Crefname{subparagraph}{Abschnitt}{Abschnitte}
-\else
-  \crefname{listing}{\lstlistingname}{\lstlistingname}
-  \Crefname{listing}{Listing}{Listings}
-\fi
+%\usepackage[capitalise,nameinlink,noabbrev]{cleveref}
+%\ifdeutsch
+%  \crefname{table}{Tabelle}{Tabellen}
+%  \Crefname{table}{Tabelle}{Tabellen}
+%  \crefname{figure}{\figurename}{\figurename}
+%  \Crefname{figure}{Abbildung}{Abbildungen}
+%  \crefname{equation}{Gleichung}{Gleichungen}
+%  \Crefname{equation}{Gleichung}{Gleichungen}
+%  \crefname{theorem}{Theorem}{Theoreme}
+%  \Crefname{theorem}{Theorem}{Theoreme}
+%  \crefname{listing}{\lstlistingname}{\lstlistingname}
+%  \Crefname{listing}{Listing}{Listings}
+%  \crefname{section}{Abschnitt}{Abschnitte}
+%  \Crefname{section}{Abschnitt}{Abschnitte}
+%  \crefname{paragraph}{Abschnitt}{Abschnitte}
+%  \Crefname{paragraph}{Abschnitt}{Abschnitte}
+%  \crefname{subparagraph}{Abschnitt}{Abschnitte}
+%  \Crefname{subparagraph}{Abschnitt}{Abschnitte}
+%\else
+%  \crefname{listing}{\lstlistingname}{\lstlistingname}
+%  \Crefname{listing}{Listing}{Listings}
+%\fi
 
 
 % DE: Zur Darstellung von Algorithmen
@@ -880,13 +891,13 @@
 % \floatstyle{ruled} % TODO: enabled or disabled causes no change - listings and algorithms are always ruled
 %
 \newfloat{Listing}{tbp}{code}[chapter]
-\crefname{Listing}{Listing}{Listings}
+%\crefname{Listing}{Listing}{Listings}
 
 \newfloat{Algorithmus}{tbp}{alg}[chapter]
 \ifdeutsch
-  \crefname{Algorithmus}{Algorithmus}{Algorithmus}
+  %\crefname{Algorithmus}{Algorithmus}{Algorithmus}
 \else
-  \crefname{Algorithmus}{Algorithm}{Algorithms}
+  %\crefname{Algorithmus}{Algorithm}{Algorithms}
   \floatname{Algorithmus}{Algorithm}
 \fi
 
@@ -1119,7 +1130,7 @@
 \makesavenoteenv{tabular}
 \makesavenoteenv{table}
 % Reuse of footnotes, see http://tex.stackexchange.com/questions/10102/multiple-references-to-the-same-footnote-with-hyperref-support-is-there-a-bett
-\crefformat{footnote}{#2\footnotemark[#1]#3}
+%\crefformat{footnote}{#2\footnotemark[#1]#3}
 
 
 % EN: pgfplots (optional if the ppackage is installed)
