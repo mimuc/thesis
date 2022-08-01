@@ -120,7 +120,7 @@ More details about mathematical environments provides the documentation availabl
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Sourcecode}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Cref{lst:ListingANDlstlisting} shows how to emmbed source code.
+\autoref{lst:ListingANDlstlisting} shows how to emmbed source code.
 With \texttt{\textbackslash lstinputlisting} the source code can be loaded directly from files.
 
 %Listing-Umgebung wurde durch \newfloat{Listing} definiert
@@ -143,7 +143,7 @@ Source code is also available in the text \lstinline|<listing />|.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pseudocode}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Cref{alg:sample} shows a sample algorithm.
+\autoref{alg:sample} shows a sample algorithm.
 \begin{Algorithmus} %Use the environment only if you want to place the algorithm similar to graphics from TeX
   \caption{Sample algorithm}
   \label{alg:sample}
@@ -207,7 +207,7 @@ test2\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Figures}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The \cref{fig:chor1} and \ref{fig:chor2} are important to understand this document.
+The \autoref{fig:chor1} and \ref{fig:chor2} are important to understand this document.
 In the appendix \vref{fig:AnhangsChor} shows again the complete choreography.
 
 %The parameters in square brackets are optional - e.g. [htb!]
@@ -251,14 +251,14 @@ In the appendix \vref{fig:AnhangsChor} shows again the complete choreography.
   \label{fig:subfig_example}
 \end{figure}
 
-\Cref{fig:subfig_example} shows the usage of the package subcaption.
-It is indeed possible to reference to sub figures: \Cref{fig:subfigA}.
+\autoref{fig:subfig_example} shows the usage of the package subcaption.
+It is indeed possible to reference to sub figures: \autoref{fig:subfigA}.
 
 It is possible to convert SVGs to PDF directly during compilation.
 This is described in the source code of latex-tipps.tex, but commented out.
 
 \iffalse % <-- Take this away if inkscape is in the path
-  The SVG in \cref{fig:directSVG} is directly included, while the text in the SVG in \cref{fig:latexSVG} is set using pdflatex.
+  The SVG in \autoref{fig:directSVG} is directly included, while the text in the SVG in \autoref{fig:latexSVG} is set using pdflatex.
   If you want to see the graphics, inkscape must be in PATH and in the text source \texttt{\textbackslash{}iffalse} and \text{\textbackslash{}iftrue} have to be commented out.
 
   \begin{figure}
@@ -280,7 +280,7 @@ This is described in the source code of latex-tipps.tex, but commented out.
 
 
 \section{More Illustrations}
-\Cref{fig:AnhangsChor,fig:AnhangsChor2} show two choreographies, which should further explain the facts. The second figure is rotated 90 degrees to demonstrate the \texttt{pdflscape} package.
+\autoref{fig:AnhangsChor,fig:AnhangsChor2} show two choreographies, which should further explain the facts. The second figure is rotated 90 degrees to demonstrate the \texttt{pdflscape} package.
 
 \begin{figure}
   \centering
@@ -351,7 +351,7 @@ The tikz is a package for creating graphics programmatically. With this package 
 \section{UML diagrams using tikz-uml}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\Cref{fig:uml} presents a class diagram typeset using tikz-uml.
+\autoref{fig:uml} presents a class diagram typeset using tikz-uml.
 
 \begin{figure}
   \centering
@@ -417,7 +417,7 @@ In case \lualatex{} is used and PlantUML is installed, UML diagrams can be defin
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Tables}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cref{tab:Ergebnisse} shows results and \cref{tab:Werte} shows how numerical data can be represented in a table.
+\autoref{tab:Ergebnisse} shows results and \autoref{tab:Werte} shows how numerical data can be represented in a table.
 \begin{table}
   \centering
   \begin{tabular}{ccc}
@@ -602,12 +602,12 @@ More information at: \url{http://tug.ctan.org/macros/latex/contrib/glossaries/gl
 For distant sections \qq{varioref} is recommended:
 \qq{See \vref{sec:mf}}.
 The command \texttt{\textbackslash{}vref} works similar to \texttt{\textbackslash{}cref} the difference beeing that a reference to the page is additionally added.
-\texttt{vref}: \qq{\vref{sec:firstsectioninlatexhints}}, \texttt{cref}: \qq{\cref{sec:firstsectioninlatexhints}}, \texttt{ref}: \qq{\ref{sec:firstsectioninlatexhints}}.
+\texttt{vref}: \qq{\vref{sec:firstsectioninlatexhints}}, \texttt{cref}: \qq{\autoref{sec:firstsectioninlatexhints}}, \texttt{ref}: \qq{\ref{sec:firstsectioninlatexhints}}.
 
 If \qq{varioref} causes difficulties, then \qq{cref} can be used instead.
-This also creates the word \qq{section} automatically: \cref{sec:mf}.
+This also creates the word \qq{section} automatically: \autoref{sec:mf}.
 This is also possible for illustrations etc.
-In English please use \verb1\Cref{...}1 (with large \qq{C} at the beginning).
+In English please use \verb1\autoref{...}1 (with large \qq{C} at the beginning).
 
 %With MiKTeX installation from 2012-01-16 no longer necessary.
 %If a section becomes longer than one page and you want to refer to a specific place in the section with \texttt{\textbackslash{}vref}, then you should use \texttt{\textbackslash{}phantomsection} then using \texttt{vref} will also display the correct page number.
@@ -627,12 +627,12 @@ In English please use \verb1\Cref{...}1 (with large \qq{C} at the beginning).
   Definition Text
 \end{definition}
 
-\Cref{def:def1} shows \ldots
+\autoref{def:def1} shows \ldots
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Footnotes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Footnotes are provided by the command \verb+\footnote{...}+\footnote{\label{fussnote}Example footnote.}. Citing footnotes is possible by provinding a label\verb+\footnote{\label{...}...}+ and cite the footnote with \verb+\cref{...}+ in the text\cref{fussnote}.
+Footnotes are provided by the command \verb+\footnote{...}+\footnote{\label{fussnote}Example footnote.}. Citing footnotes is possible by provinding a label\verb+\footnote{\label{...}...}+ and cite the footnote with \verb+\autoref{...}+ in the text\autoref{fussnote}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

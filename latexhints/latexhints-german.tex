@@ -97,7 +97,7 @@ $\abs{X}$.
 Eine ausführliche Anleitung zum Mathematikmodus von LaTeX findet sich in \url{http://www.ctan.org/tex-archive/help/Catalogue/entries/voss-mathmode.html}.
 
 \section{Quellcode}
-\Cref{lst:ListingANDlstlisting,helloworld} zeigen, wie man Programmlistings einbindet.
+\autoref{lst:ListingANDlstlisting,helloworld} zeigen, wie man Programmlistings einbindet.
 Mittels \texttt{\textbackslash lstinputlisting} kann man den Inhalt direkt aus Dateien lesen.
 
 %Listing-Umgebung wurde durch \newfloat{Listing} definiert
@@ -121,7 +121,7 @@ Quellcode im \lstinline|<listing />| ist auch möglich.
 
 
 \section{Pseudocode}
-\Cref{alg:sample} zeigt einen Beispielalgorithmus.
+\autoref{alg:sample} zeigt einen Beispielalgorithmus.
 
 
 \begin{Algorithmus} %Die Umgebung nur benutzen, wenn man den Algorithmus ähnlich wie Graphiken von TeX platzieren lassen möchte
@@ -189,7 +189,7 @@ test2\\
 
 \section{Abbildungen}
 
-Die \cref{fig:chor1} und \ref{fig:chor2} sind für das Verständnis dieses Dokuments wichtig.
+Die \autoref{fig:chor1} und \ref{fig:chor2} sind für das Verständnis dieses Dokuments wichtig.
 Im Anhang zeigt \vref{fig:AnhangsChor} erneut die komplette Choreographie.
 
 %Die Parameter in eckigen Klammern sind optionale Parameter - z.B. [htb!]
@@ -241,14 +241,14 @@ Im Anhang zeigt \vref{fig:AnhangsChor} erneut die komplette Choreographie.
   \label{fig:subfig_example}
 \end{figure}
 
-\Cref{fig:subfig_example} zeigt die Verwendung des subcaption-Pakets.
-Es ist auch möglich, auf Unterabbildungen zu verweisen: \Cref{fig:subfigA}.
+\autoref{fig:subfig_example} zeigt die Verwendung des subcaption-Pakets.
+Es ist auch möglich, auf Unterabbildungen zu verweisen: \autoref{fig:subfigA}.
 
 Es ist möglich, SVGs direkt beim Kompilieren in PDF umzuwandeln.
 Dies ist im Quellcode zu latex-tipps.tex beschrieben, allerdings auskommentiert.
 
 \iffalse % <-- Das hier wegnehmen, falls inkscape im Pfad ist
-  Das SVG in \cref{fig:directSVG} ist direkt eingebunden, während der Text im SVG in \cref{fig:latexSVG} mittels pdflatex gesetzt ist.
+  Das SVG in \autoref{fig:directSVG} ist direkt eingebunden, während der Text im SVG in \autoref{fig:latexSVG} mittels pdflatex gesetzt ist.
   Falls man die Graphiken sehen möchte, muss inkscape im PATH sein und im Tex-Quelltext \texttt{\textbackslash{}iffalse} und \texttt{\textbackslash{}iftrue} auskommentiert sein.
 
   \begin{figure}
@@ -269,7 +269,7 @@ Dies ist im Quellcode zu latex-tipps.tex beschrieben, allerdings auskommentiert.
 
 
 \section{Weitere Illustrationen}
-\Cref{fig:AnhangsChor,fig:AnhangsChor2} zeigen zwei Choreographien, die den Sachverhalt weiter erläutern sollen.
+\autoref{fig:AnhangsChor,fig:AnhangsChor2} zeigen zwei Choreographien, die den Sachverhalt weiter erläutern sollen.
 Die zweite Abbildung ist um 90 Grad gedreht, um das Paket \texttt{pdflscape} zu demonstrieren.
 
 \begin{figure}
@@ -369,7 +369,7 @@ Hier gibt es sehr viele visuelle Beispiele was tikz alles kann\footnote{\url{htt
 
 \section{UML-Diagramme mit tikz-uml}
 
-\Cref{fig:uml} zeigt ein Klassendiagramm, das mittels tikz-uml gesetzt wurde.
+\autoref{fig:uml} zeigt ein Klassendiagramm, das mittels tikz-uml gesetzt wurde.
 
 \begin{figure}
   \centering
@@ -408,7 +408,7 @@ Hier gibt es sehr viele visuelle Beispiele was tikz alles kann\footnote{\url{htt
 
 \section{Tabellen}
 
-\cref{tab:Ergebnisse} zeigt Ergebnisse und die \cref{tab:Ergebnisse} zeigt wie numerische Daten in einer Tabelle representiert werden können.
+\autoref{tab:Ergebnisse} zeigt Ergebnisse und die \autoref{tab:Ergebnisse} zeigt wie numerische Daten in einer Tabelle representiert werden können.
 \begin{table}
   \centering
   \begin{tabular}{ccc}
@@ -596,12 +596,12 @@ Mehr Infos unter: \url{http://tug.ctan.org/macros/latex/contrib/glossaries/gloss
 Für weit entfernte Abschnitte ist \qq{varioref} zu empfehlen:
 \qq{Siehe \vref{sec:mf}}.
 Das Kommando \texttt{\textbackslash{}vref} funktioniert ähnlich wie \texttt{\textbackslash{}cref} mit dem Unterschied, dass zusätzlich ein Verweis auf die Seite hinzugefügt wird.
-\texttt{vref}: \qq{\vref{sec:firstsectioninlatexhints}}, \texttt{cref}: \qq{\cref{sec:firstsectioninlatexhints}}, \texttt{ref}: \qq{\ref{sec:firstsectioninlatexhints}}.
+\texttt{vref}: \qq{\vref{sec:firstsectioninlatexhints}}, \texttt{cref}: \qq{\autoref{sec:firstsectioninlatexhints}}, \texttt{ref}: \qq{\ref{sec:firstsectioninlatexhints}}.
 
 Falls \qq{varioref} Schwierigkeiten macht, dann kann man stattdessen \qq{cref} verwenden.
-Dies erzeugt auch das Wort \qq{Abschnitt} automatisch: \cref{sec:mf}.
+Dies erzeugt auch das Wort \qq{Abschnitt} automatisch: \autoref{sec:mf}.
 Das geht auch für Abbildungen usw.
-Im Englischen bitte \verb1\Cref{...}1 (mit großem \qq{C} am Anfang) verwenden.
+Im Englischen bitte \verb1\autoref{...}1 (mit großem \qq{C} am Anfang) verwenden.
 
 
 %Mit MiKTeX Installation ab dem 2012-01-16 nicht mehr nötig
@@ -624,12 +624,12 @@ Im Englischen bitte \verb1\Cref{...}1 (mit großem \qq{C} am Anfang) verwenden.
   Definition Text
 \end{definition}
 
-\Cref{def:def1} zeigt \ldots
+\autoref{def:def1} zeigt \ldots
 
 \section{Fußnoten}
 Fußnoten können mit dem Befehl \verb+\footnote{...}+ gesetzt werden\footnote{\label{fussnote}Diese Fußnote ist ein Beispiel.
 }.
-Mehrfache Verwendung von Fußnoten ist möglich indem man zu erst ein Label in der Fußnote setzt \verb+\footnote{\label{...}...}+ und anschließend mittels \verb+\cref{...}+ die Fußnote erneut verwendet\cref{fussnote}.
+Mehrfache Verwendung von Fußnoten ist möglich indem man zu erst ein Label in der Fußnote setzt \verb+\footnote{\label{...}...}+ und anschließend mittels \verb+\autoref{...}+ die Fußnote erneut verwendet\autoref{fussnote}.
 
 
 \section{Verschiedenes}
