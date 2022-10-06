@@ -1185,6 +1185,25 @@
 %     Source: https://tex.stackexchange.com/a/33842/9075 -> comment by esdd
 \RedeclareSectionCommand[tocnumwidth=2.8em]{section}
 
+% Fix TOC sans serif font -- https://tex.stackexchange.com/questions/625079/how-to-control-font-in-srcbook-koma-script-table-of-contents
+\RedeclareSectionCommands[%
+  tocentrynumberformat=\sffamily,%
+  tocentryformat=\sffamily,%
+  tocpagenumberformat=\sffamily,%
+]{section}
+
+\RedeclareSectionCommands[%
+  tocentrynumberformat=\sffamily,%
+  tocentryformat=\sffamily,%
+  tocpagenumberformat=\sffamily,%
+]{subsection}
+
+\RedeclareSectionCommands[%
+  tocentrynumberformat=\sffamily,%
+  tocentryformat=\sffamily,%
+  tocpagenumberformat=\sffamily,%
+]{subsubsection}
+
 
 % DE: Angaben in die PDF-Infos uebernehmen
 \makeatletter
