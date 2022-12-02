@@ -2,7 +2,7 @@
 
 Currently, it is the unofficial LaTeX template for Master, Bachelor, Diploma, and Student Theses.
 
-See [docs/](docs/) or <http://mimuc.github.io/thesis-template/> for a documentation of the template.
+See [docs/](docs/) for a documentation of the template.
 
 ## License
 
