@@ -48,6 +48,7 @@
 % for possible option values see README.md
 \DeclareStringOption[title not set]{title} % Title of the work
 \DeclareStringOption[author not set]{author}
+\DeclareStringOption[orcid not set]{orcid}
 \DeclareStringOption[author email not set]{email}
 \DeclareStringOption[bachelor]{type}
 \DeclareStringOption[fac]{institute}
@@ -331,7 +332,9 @@
                                         \end{center}%
                                         \vskip 20mm plus 20mm minus 7.5mm
                                         \begin{center}
-                                            \@setfontsize\Large{20}{20}\MCS@author
+                                            \ifthenelse{\equal{\MCS@orcid}{\string 0000-0000-0000-0000}}
+                                            {\@setfontsize\Large{20}{20}{\MCS@author}}
+                                            {\@setfontsize\Large{20}{20}{\href{https://orcid.org/\MCS@orcid}{\MCS@author}}}
                                         \end{center}%
                                         \begin{center}
                                             \MCS@email
