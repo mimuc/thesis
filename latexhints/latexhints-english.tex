@@ -51,7 +51,7 @@ The following sentence demonstrates
   \item the capitalization of author names at the beginning of the sentence,
   \item the correct citation using author names and the reference,
   \item that the author names are a hyperlink to the bibliography and that
-  \item the bibliography contains the name prefix \qq{van der} of \qq{Wil M.\,P.\ van der Aalst}.
+  \item the bibliography contains the name prefix \textit{van der} of \textit{Wil M.\,P.\ van der Aalst}.
 \end{inparaenum}
 
 \begin{filecontents*}{\democodefile}
@@ -76,10 +76,10 @@ When creating the Bibtex file it is recommended to make sure that the DOI is lis
 \section{Formulas and Equations}
 \label{sec:mf}
 
-\begin{filecontents*}{\democodefile}
+\begin{filecontents}%{\democodefile}
 Equations $f(x)=x$ inside the text can be provided.
-\end{filecontents*}
-\PrintDemo{style=parallel}
+\end{filecontents}
+%\PrintDemo{style=parallel}
 
 A list with all available mathematical symbols is provided at \url{http://texdoc.net/pkg/symbols-a4}.
 
@@ -90,7 +90,7 @@ As example the set of natural numbers is given by $\mathbb{N}$.
 
 For the documentation of editing mathematical formulas read the package documentation of \texttt{amsmath}\footnote{\url{http://texdoc.net/pkg/amsmath}}.
 
-Equation~\ref{eq:test} is numbered and can be referenced in the text:
+The equation is numbered and can be referenced in the text:
 \begin{filecontents*}{\democodefile}
 \begin{align}
   \label{eq:test}
@@ -208,21 +208,21 @@ test2\\
 \section{Figures}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The \autoref{fig:chor1} and \ref{fig:chor2} are important to understand this document.
-In the appendix \vref{fig:AnhangsChor} shows again the complete choreography.
+In the appendix \autoref{fig:AnhangsChor} shows again the complete choreography.
 
 %The parameters in square brackets are optional - e.g. [htb!]
 %htb! means: Dear LaTeX, please place this image here first ("_h_ere"). If this does not work, place it at the "_t_op" of the page. And if this is not possible, please place it at the "_b_ottom" of the page. And please, please prefer here and above, even if it doesn't look so optimal ("!")
 %These should NOT be used if possible. LaTeX's algorithm for placing the glide environment is already very good!
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{choreography.pdf}
+  \includegraphics[width=\textwidth]{figures/choreography.pdf}
   \caption{Example Choreography}
   \label{fig:chor1}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=.8\textwidth]{choreography.pdf}
+  \includegraphics[width=.8\textwidth]{figures/choreography.pdf}
   \caption[Example Choreography]{The example choreography. Now slightly smaller to demonstrate \texttt{\textbackslash textwidth}. And also the use of alternative captions for the list of images. However, the latter is only conditionally recommended, because who reads so much text under a picture? Or is it just a matter of style?}
   \label{fig:chor2}
 \end{figure}
@@ -231,19 +231,19 @@ In the appendix \vref{fig:AnhangsChor} shows again the complete choreography.
 \begin{figure}
   \hfill
   \begin{subfigure}{.3\textwidth}
-    \includegraphics[width=\textwidth]{choreography.pdf}
+    \includegraphics[width=\textwidth]{figures/choreography.pdf}
     \caption{Choreography 1}
     \label{fig:subfigA}
   \end{subfigure}
   \hfill
   \begin{subfigure}{.3\textwidth}
-    \includegraphics[width=\textwidth]{choreography.pdf}
+    \includegraphics[width=\textwidth]{figures/choreography.pdf}
     \caption{Choreography 2}
     \label{fig:subfigB}
   \end{subfigure}
   \hfill
   \begin{subfigure}{.3\textwidth}
-    \includegraphics[width=.9\textwidth]{choreography.pdf}
+    \includegraphics[width=.9\textwidth]{figures/choreography.pdf}
     \caption{Choreography 3}
     \label{fig:subfigC}
   \end{subfigure}
@@ -280,11 +280,11 @@ This is described in the source code of latex-tipps.tex, but commented out.
 
 
 \section{More Illustrations}
-\autoref{fig:AnhangsChor,fig:AnhangsChor2} show two choreographies, which should further explain the facts. The second figure is rotated 90 degrees to demonstrate the \texttt{pdflscape} package.
+\autoref{fig:AnhangsChor} and \ref{fig:AnhangsChor2} show two choreographies, which should further explain the facts. The second figure is rotated 90 degrees to demonstrate the \texttt{pdflscape} package.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{choreography.pdf}
+  \includegraphics[width=\textwidth]{figures/choreography.pdf}
   \caption{Example Choreography I}
   \label{fig:AnhangsChor}
 \end{figure}
@@ -293,107 +293,47 @@ This is described in the source code of latex-tipps.tex, but commented out.
   %sidewaysfigure
   \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{choreography.pdf}
+    \includegraphics[width=\textwidth]{figures/choreography.pdf}
     \caption{Example Choreography II}
     \label{fig:AnhangsChor2}
   \end{figure}
 \end{landscape}
 
 
-\IfFileExists{pgfplots.sty}{
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{Plots with pgfplots}
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  The package pdfplots provides plotting of functions directly in \LaTeX~like with matlab or gnuplot. Some visual examples are available here\footnote{\url{http://texdoc.net/pkg/visualtikz}}.
-  \begin{figure}[h]
-    \centering
-    \begin{tikzpicture}
-      \begin{axis}[xlabel=$x$,
-          ylabel=$\sin(x)$]
-        \addplot {sin(deg(x))};  % Print sine function
-      \end{axis}
-    \end{tikzpicture}
-    \caption{Plot of $\sin(x)$ direclty inside the figure environment with pgfplots.}
-  \end{figure}
-
-  \begin{figure}[h]
-    \centering
-    \begin{tikzpicture}
-      \begin{axis}[xlabel=$x$,
-          ylabel=$y$]
-        \addplot table [x=a, y=c, col sep=comma] {data/data.csv};  % Read coordinates from csv file and plot them
-      \end{axis}
-    \end{tikzpicture}
-    \caption{Coordinates $x$ and $y$ read from csv file and plotted pgfplots.}
-  \end{figure}
-
-}{}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Figures with tikz}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The tikz is a package for creating graphics programmatically. With this package grids or other regular strucutres can be easliy generated.
-
-\begin{figure}[ht]
-  \centering
-  \begin{tikzpicture}
-    \draw(0,0) rectangle (4,4);
-    \foreach \x in {0.5,1,1.5,2,2.5,3,3.5}
-    \foreach \y in {0.5,1,1.5,2,2.5,3,3.5}
-    \draw(\x,\y) circle (1pt);
-  \end{tikzpicture}
-  \caption{A regular grid genrated with easily with two for loops.}\label{fig:tikz_example}
-\end{figure}
+%\IfFileExists{pgfplots.sty}{
+%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  \section{Plots with pgfplots}
+%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  The package pdfplots provides plotting of functions directly in \LaTeX~like with matlab or gnuplot. Some visual examples are available here\footnote{\url{http://texdoc.net/pkg/visualtikz}}.
+%  \begin{figure}[h]
+%    \centering
+%    \begin{tikzpicture}
+%      \begin{axis}[xlabel=$x$,
+%          ylabel=$\sin(x)$]
+%        \addplot {sin(deg(x))};  % Print sine function
+%      \end{axis}
+%    \end{tikzpicture}
+%    \caption{Plot of $\sin(x)$ direclty inside the figure environment with pgfplots.}
+%  \end{figure}
+%
+%  \begin{figure}[h]
+%    \centering
+%    \begin{tikzpicture}
+%      \begin{axis}[xlabel=$x$,
+%          ylabel=$y$]
+%        \addplot table [x=a, y=c, col sep=comma] {data/data.csv};  % Read coordinates from csv file and plot them
+%      \end{axis}
+%    \end{tikzpicture}
+%    \caption{Coordinates $x$ and $y$ read from csv file and plotted pgfplots.}
+%  \end{figure}
+%
+%}{}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{UML diagrams using tikz-uml}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\autoref{fig:uml} presents a class diagram typeset using tikz-uml.
-
-\begin{figure}
-  \centering
-  \begin{tikzpicture}
-  \begin{umlpackage}{p}
-  \begin{umlpackage}{sp1}
-  \umlclass[template=T]{A}{
-    n : uint \\ t : float
-  }{}
-  \umlclass[y=-3]{B}{
-    d : double
-  }{
-    \umlvirt{setB(b : B) : void} \\ getB() : B}
-  \end{umlpackage}
-  \begin{umlpackage}[x=10,y=-6]{sp2}
-  \umlinterface{C}{
-    n : uint \\ s : string
-  }{}
-  \end{umlpackage}
-  \umlclass[x=2,y=-10]{D}{
-    n : uint
-    }{}
-  \end{umlpackage}
-
-  \umlassoc[geometry=-|-, arg1=tata, mult1=*, pos1=0.3, arg2=toto, mult2=1, pos2=2.9, align2=left]{C}{B}
-  \umlunicompo[geometry=-|, arg=titi, mult=*, pos=1.7, stereo=vector]{D}{C}
-  \umlimport[geometry=|-, anchors=90 and 50, name=import]{sp2}{sp1}
-  \umlaggreg[arg=tutu, mult=1, pos=0.8, angle1=30, angle2=60, loopsize=2cm]{D}{D}
-  \umlinherit[geometry=-|]{D}{B}
-  \umlnote[x=2.5,y=-6, width=3cm]{B}{A note with respect to class B}
-  \umlnote[x=7.5,y=-2]{import-2}{A anotation}
-  \end{tikzpicture}
-  \caption{Class diagram generated with tikz-uml. Example adapted from Nicolas Kielbasiewicz.}
-  \label{fig:uml}
-\end{figure}
-
-\section{UML diagrams using PlantUML}
-
-In case \lualatex{} is used and PlantUML is installed, UML diagrams can be defined using PlantUML.
-
-% Only works if "--shell-escape" is activated. Please activate only if you are sure, your compilation settings are correct
-%\IfFileExists{plantuml.sty}{\input{latexhints-english-plantuml}}{}
+% Note: Don't do this. Use Python or R for your figures.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Figures with tikz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -427,7 +367,7 @@ In case \lualatex{} is used and PlantUML is installed, UML diagrams can be defin
     \url{tabsatz.pdf}                            & recommended                                                     & gesetzt \\
 
     \multirow{2}{*}{Example}                    & \multicolumn{2}{c}{a nice example}                                \\
-                                                 & \multicolumn{2}{c}{for using \qq{multirow}}           \\
+                                                 & \multicolumn{2}{c}{for using \textit{multirow}}           \\
     \bottomrule
   \end{tabular}
   \caption[Example Table]{Exampe Table -- see \url{http://www.ctan.org/tex-archive/info/german/tabsatz/}}
@@ -456,43 +396,24 @@ In case \lualatex{} is used and PlantUML is installed, UML diagrams can be defin
   \label{tab:Werte}
 \end{table}
 
-\IfFileExists{pgfplotstable.sty}{
-
-\subsection{Tables with pgfplots}
-With the pgfplotstable package tables can be directly generated from a csv file.
-
-\begin{table}[h]
-\centering
-\pgfplotstabletypeset[
-col sep = comma,
-every head row/.style={before row=\toprule,after row=\midrule},
-every last row/.style={after row=\bottomrule},
-display columns/0/.style={string type,column name={}}
-]
-{data/data.csv}
-\caption{Table direclty generated from the values of a csf file.}
-\end{table}
-}{}
-
-
 \section{Tables spanning multiple pages}
 
 
-\begin{longtable}{|l|l|l|}
+\begin{longtable}{lll}
 \caption{A sample long table.} \label{tab:long} \\
 
-\hline \multicolumn{1}{|c|}{\textbf{First column}} & \multicolumn{1}{c|}{\textbf{Second column}} & \multicolumn{1}{c|}{\textbf{Third column}} \\ \hline
+\toprule \multicolumn{1}{c}{\textbf{First column}} & \multicolumn{1}{c}{\textbf{Second column}} & \multicolumn{1}{c}{\textbf{Third column}} \\ \midrule
 \endfirsthead
 
 \multicolumn{3}{c}%
 {{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
-\hline \multicolumn{1}{|c|}{\textbf{First column}} & \multicolumn{1}{c|}{\textbf{Second column}} & \multicolumn{1}{c|}{\textbf{Third column}} \\ \hline
+\hline \multicolumn{1}{c}{\textbf{First column}} & \multicolumn{1}{c}{\textbf{Second column}} & \multicolumn{1}{c}{\textbf{Third column}} \\ \midrule
 \endhead
 
-\hline \multicolumn{3}{|r|}{{Continued on next page}} \\ \hline
+\midrule \multicolumn{3}{r}{{Continued on next page}} \\ \midrule
 \endfoot
 
-\hline \hline
+\bottomrule
 \endlastfoot
 
 A & BC & D \\
@@ -599,15 +520,7 @@ More information at: \url{http://tug.ctan.org/macros/latex/contrib/glossaries/gl
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{References}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-For distant sections \qq{varioref} is recommended:
-\qq{See \vref{sec:mf}}.
-The command \texttt{\textbackslash{}vref} works similar to \texttt{\textbackslash{}cref} the difference beeing that a reference to the page is additionally added.
-\texttt{vref}: \qq{\vref{sec:firstsectioninlatexhints}}, \texttt{cref}: \qq{\autoref{sec:firstsectioninlatexhints}}, \texttt{ref}: \qq{\ref{sec:firstsectioninlatexhints}}.
-
-If \qq{varioref} causes difficulties, then \qq{cref} can be used instead.
-This also creates the word \qq{section} automatically: \autoref{sec:mf}.
-This is also possible for illustrations etc.
-In English please use \verb1\autoref{...}1 (with large \qq{C} at the beginning).
+For distant sections, \textit{autoref} is recommended: \textit{See \autoref{sec:mf}}.
 
 %With MiKTeX installation from 2012-01-16 no longer necessary.
 %If a section becomes longer than one page and you want to refer to a specific place in the section with \texttt{\textbackslash{}vref}, then you should use \texttt{\textbackslash{}phantomsection} then using \texttt{vref} will also display the correct page number.
@@ -620,51 +533,17 @@ In English please use \verb1\autoref{...}1 (with large \qq{C} at the beginning).
 
 %Here is the example: See Section \vref{hack1} and Section \vref{hack2}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Definitions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{definition}[Title]
-  \label{def:def1}
-  Definition Text
-\end{definition}
-
-\autoref{def:def1} shows \ldots
+%\section{Definitions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{definition}[Title]
+%  \label{def:def1}
+%  Definition Text
+%\end{definition}
+%
+%\autoref{def:def1} shows \ldots
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Footnotes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Footnotes are provided by the command \verb+\footnote{...}+\footnote{\label{fussnote}Example footnote.}. Citing footnotes is possible by provinding a label\verb+\footnote{\label{...}...}+ and cite the footnote with \verb+\autoref{...}+ in the text\autoref{fussnote}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Various Things}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\label{sec:diff}
-\ifdeutsch
-  Numbers (123\,654\,789) are nicely set.
-  Either in a line or as non-lining figure.
-  The latter is reached by parameter \texttt{osf} at package \texttt{libertine} or.\ \texttt{mathpazo} in \text{fonts.tex}.
-\fi
-
-\begin{filecontents*}{\democodefile}
-\begin{compactenum}[I.]
-  \item You can also keep the numbering compact thanks to paralist
-  \item and switch to a different numbering
-\end{compactenum}
-\end{filecontents*}
-\PrintDemo{style=parallel}
-
-The words \qq{workflow} and \qq{dwarflike} can be copied from the PDF and pasted to a text file.
-
-\begin{filecontents*}{\democodefile}
-In case \LuaLaTeX{} is used as compiler, there is no ligature at \qq{f\/l} in the word \qq{dwarflike} (in contrast to \qq{fl} at \qq{workflow}).
-In other words: \qq{dwarflike} and \qq{dwarf\/like} look the same in the PDF.
-In case they do not, there is an issue with Lua\LaTeX{} and the selnolig package.
-\end{filecontents*}
-\PrintDemo{style=parallel}
-% Meta comment: The precise form of the optimal ligation suppression command may vary depending on the character pairs involved - see https://tex.stackexchange.com/q/28437/9075
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Closing remarks}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Please feel free to provide enhancements for this template and create a new ticket on GitHub (\url{https://github.com/latextemplates/uni-stuttgart-computer-science-template/issues}).

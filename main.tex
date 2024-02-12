@@ -1,34 +1,9 @@
-% !TeX spellcheck = en-US
-% !TeX encoding = utf8
-% !TeX program = pdflatex
-% !BIB program = biber
-% -*- coding:utf-8 mod:LaTeX -*-
-
-
-% vv  scroll down to line 200 for content  vv
-
+%\RequirePackage{kvoptions-patch}
+\documentclass[a4paper, twoside, bibliography=totoc, headsepline, cleardoublepage=empty, parskip=half, draft=false]{scrbook}
 
 \let\ifdeutsch\iffalse
 \let\ifenglish\iftrue
 
-
-\input{pre-documentclass}
-\documentclass[
-  %
-  %ngerman, %%% Add if you write in German.
-  %
-  % fontsize=11pt is the standard
-  a4paper,  % Standard format - only KOMAScript uses paper=a4 - https://tex.stackexchange.com/a/61044/9075
-  twoside,  % we are optimizing for both screen and two-side printing. So the page numbers will jump, but the content is configured to stay in the middle (by using the geometry package)
-  bibliography=totoc,
-  %               idxtotoc,   %Index ins Inhaltsverzeichnis
-  %               liststotoc, %List of X ins Inhaltsverzeichnis, mit liststotocnumbered werden die Abbildungsverzeichnisse nummeriert
-  headsepline,
-  cleardoublepage=empty,
-  parskip=half,
-  %               draft    % um zu sehen, wo noch nachgebessert werden muss - wichtig, da Bindungskorrektur mit drin
-  draft=false
-]{scrbook}
 \input{config}
 
 
@@ -38,47 +13,24 @@
   orcid=0000-0000-0000-0000, % get your own ORCID via https://orcid.org/
   email={sigmund.freud@ifi.lmu.de},
   type=bachelor,
-  institute={Institut für Informatik}, % or other institute names - or just a plain string using {Demo\\Demo...}
+  institute={Institut für Informatik},
   course={Medieninformatik},
   examiner={Prof.\ Dr.\ Uwe Fessor},
   supervisor={Dipl.-Inf.\ Roman Tiker,\\Dipl.-Inf.\ Laura Stern,\\Otto Normalverbraucher,\ M.Sc.},
   startdate={July 5, 2018},
   enddate={January 5, 2019},
-  % Falls keine Lizenz gewünscht wird bitte auf "none" setzen
-  % Die Lizenz erlaubt es zu nichtkommerziellen Zwecken die Arbeit zu
-  % vervielfältigen und Kopien zu machen. Dabei muss aber immer der Autor
-  % angegeben werden. Eine kommerzielle Verwertung ist für den Autor
-  % weiter möglich.
   copyright=ccbysa, % ccbysa, ccbynosa, cc0, none
   language=english
 ]{lmu-thesis-cover}
 
 \input{acronyms}
 
-\makeindex
+%\makeindex
 
 \begin{document}
 
-%tex4ht-Konvertierung verschönern
-\iftex4ht
-  % tell tex4ht to create picures also for formulas starting with '$'
-  % WARNING: a tex4ht run now takes forever!
-  \Configure{$}{\PicMath}{\EndPicMath}{}
-  %$ % <- syntax highlighting fix for emacs
-  \Css{body {text-align:justify;}}
-
-  %conversion of .pdf to .png
-  \Configure{graphics*}
-  {pdf}
-  {\Needs{"convert \csname Gin@base\endcsname.pdf
-      \csname Gin@base\endcsname.png"}%
-    \Picture[pict]{\csname Gin@base\endcsname.png}%
-  }
-\fi
-
-%\VerbatimFootnotes %verbatim text in Fußnoten erlauben. Geht normalerweise nicht.
-
 \input{commands}
+
 \pagenumbering{arabic}
 \Coverpage
 \Copyright

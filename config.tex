@@ -19,6 +19,17 @@
 % Zwischen zwei Blöcken sind 2 Leerzeilen!
 
 
+\RequirePackage{ifluatex}
+\ifluatex
+  % do not load anything
+\else
+  \ifdeutsch
+    \RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+  \fi
+\fi
+
+
+
 % EN: Enable copy and paste of text from the PDF
 %     Only required for pdflatex. It "just works" in the case of lualatex.
 %     mmap enables mathematical symbols, but does not work with the newtx font set
@@ -49,7 +60,6 @@
 
 
 % DE: Parallelbetrieb tex4ht und pdflatex
-
 \makeatletter
 \@ifpackageloaded{tex4ht}{
   \def\iftex4ht{\iftrue}
@@ -105,43 +115,6 @@
   \RequirePackage[varl,scaled=.9]{inconsolata}
 \fi
 
-% EN: Fallback font - if the subsequent font packages do not define a font (e.g., monospaced)
-%     This is the modern package for "Computer Modern".
-%     In case this gets activated, one has to switch from cmap package to glyphtounicode (in the case of pdflatex)
-% DE: Fallback-Schriftart
-%\usepackage[%
-%    rm={oldstyle=false,proportional=true},%
-%    sf={oldstyle=false,proportional=true},%
-%    tt={oldstyle=false,proportional=true,variable=true},%
-%    qt=false%
-%]{cfr-lm}
-
-% EN: Headings are typset in Helvetica (which is similar to Arial)
-% DE: Schriftart fuer die Ueberschriften - ueberschreibt lmodern
-%\usepackage[scaled=.95]{helvet}
-
-% DE: Für Schreibschrift würde tun, muss aber nicht
-%\usepackage{mathrsfs} %  \mathscr{ABC}
-
-% EN: Font for the main text
-% DE: Schriftart fuer den Fliesstext - ueberschreibt lmodern
-%     Linux Libertine, siehe http://www.linuxlibertine.org/
-%     Packageparamter [osf] = Minuskel-Ziffern
-%     rm = libertine im Brottext, Linux Biolinum NICHT als serifenlose Schrift, sondern helvet (von oben) beibehalten
-%\usepackage[rm]{libertine}
-
-% EN: Alternative Font: Palantino. It is recommeded by Prof. Ludewig for German texts
-% DE: Alternative Schriftart: Palantino, Packageparamter [osf] = Minuskel-Ziffern
-%     Bitte nur in deutschen Texten
-%\usepackage{mathpazo} %ftp://ftp.dante.de/tex-archive/fonts/mathpazo/ - Tipp aus DE-TEX-FAQ 8.2.1
-
-% DE: Schriftart fuer Programmcode - ueberschreibt lmodern
-%     Falls auskommentiert, wird die Standardschriftart lmodern genommen
-%     Fuer schreibmaschinenartige Schluesselwoerter in den Listings - geht bei alten Installationen nicht, da einige Fontshapes (<>=) fehlen
-%\usepackage[scaled=.92]{luximono}
-%\usepackage{courier}
-% DE: BeraMono als Typewriter-Schrift, Tipp von http://tex.stackexchange.com/a/71346/9075
-%\usepackage[scaled=0.83]{beramono}
 
 % EN: backticks (`) are rendered as such in verbatim environments.
 %     See following links for details:
@@ -236,11 +209,11 @@
 
 
 % EN: For theorems, replacement for amsthm
-\usepackage[amsmath,hyperref]{ntheorem}
-\theorempreskipamount 2ex plus1ex minus0.5ex
-\theorempostskipamount 2ex plus1ex minus0.5ex
-\theoremstyle{break}
-\newtheorem{definition}{Definition}[section]
+%\usepackage[amsmath,hyperref]{ntheorem}
+%\theorempreskipamount 2ex plus1ex minus0.5ex
+%\theorempostskipamount 2ex plus1ex minus0.5ex
+%\theoremstyle{break}
+%\newtheorem{definition}{Definition}[section]
 
 
 % CTAN: https://ctan.org/pkg/lccaps
@@ -262,7 +235,7 @@
 
 
 % DE: Wichtig, ansonsten erscheint "No room for a new \write"
-\usepackage{scrwfile}
+%\usepackage{scrwfile}
 
 
 % EN: Support for language-specific hyphenation
@@ -308,11 +281,11 @@
 
 % EN: For even easier quotations: \qq{text}.
 %     Is not smart in the case of nesting, but good enough for the most cases
-\usepackage{textcmds}
-\ifdeutsch
-  % EN: German quotes are different. So do not use the English quotes, but the ones provided by the csquotes package.
-  \renewcommand{\qq}[1]{\enquote{#1}}
-\fi
+%\usepackage{textcmds}
+%\ifdeutsch
+%  % EN: German quotes are different. So do not use the English quotes, but the ones provided by the csquotes package.
+%  \renewcommand{\qq}[1]{\enquote{#1}}
+%\fi
 
 
 % EN: extended enumarations
@@ -444,7 +417,7 @@
 
 
 % DE: Fuer Tabellen mit Variablen Spaltenbreiten
-\usepackage{tabularx}
+%\usepackage{tabularx}
 %\usepackage{tabulary}
 
 
@@ -620,20 +593,6 @@
 \raggedbottom
 
 
-% DE: Falls die Seitenzahl bei einer Referenz auf eine Abbildung nur dann angegeben werden soll,
-%     falls sich die Abbildung nicht auf der selben Seite befindet...
-\iftex4ht
-  %tex4ht does not work well with vref, therefore we emulate vref behavior
-  \newcommand{\vref}[1]{\ref{#1}}
-\else
-  \ifdeutsch
-    \usepackage[ngerman]{varioref}
-  \else
-    \usepackage{varioref}
-  \fi
-\fi
-
-
 % EN: More beautiful tables if one uses \toprule, \midrule, \bottomrule
 % DE: Noch schoenere Tabellen als mit booktabs mit http://www.zvisionwelt.de/downloads.html
 \usepackage{booktabs}
@@ -714,18 +673,20 @@
   }
 \fi
 
+% Note: This breaks Overleaf word count. Just use \citet
 % EN: enable hyperlinked author names when using \citeauthor
 %     source: http://tex.stackexchange.com/a/75916/9075
-\DeclareCiteCommand{\citeauthor}
-{\boolfalse{citetracker}%
-  \boolfalse{pagetracker}%
-  \usebibmacro{prenote}}
-{\ifciteindex
-  {\indexnames{labelname}}
-  {}%
-  \printtext[bibhyperref]{\printnames{labelname}}}
-{\multicitedelim}
-{\usebibmacro{postnote}}
+%\DeclareCiteCommand{\citeauthor}
+%{\boolfalse{citetracker}%
+%  \boolfalse{pagetracker}%
+%  \usebibmacro{prenote}}
+%{\ifciteindex
+%  {\indexnames{labelname}}
+%  {}%
+%  \printtext[bibhyperref]{\printnames{labelname}}}
+%{\multicitedelim}
+%{\usebibmacro{postnote}}
+
 
 % EN: natbib compatibility
 %\newcommand{\citep}[1]{\cite{#1}}
@@ -739,14 +700,6 @@
 %     Wird verwendet, um etwas Text zu erzeugen, um eine volle Seite wegen Layout zu sehen.
 \usepackage[math]{blindtext}
 
-
-% EN: Make LaTeX logos available by commands. E.g., \lualatex
-%     Disabled, because currently causes \not= already defined
-%\usepackage{dtk-logos}
-
-% quick replacement:
-\newcommand{\LuaLaTeX}{Lua\LaTeX\xspace}
-\newcommand{\lualatex}{\LuaLaTeX}
 
 % DE: Neue Pakete bitte VOR hyperref einbinden. Insbesondere bei Verwendung des
 %     Pakets "index" wichtig, da sonst die Referenzierung nicht funktioniert.
@@ -817,11 +770,7 @@
   \renewcommand*{\acronymname}{List of Abbreviations}
 \fi
 \renewcommand*{\glsgroupskip}{}
-%
-% EN: Removed Glossarie as a table as a quick fix to get the template working again
-%     See http://tex.stackexchange.com/questions/145579/how-to-print-acronyms-of-glossaries-into-a-table
-%
-\makenoidxglossaries
+
 
 
 % EN: Extensions for references inside the document (\cref{fig:sample}, ...)
@@ -1136,39 +1085,8 @@
 %\crefformat{footnote}{#2\footnotemark[#1]#3}
 
 
-% EN: pgfplots (optional if the ppackage is installed)
-%     PGFPlots draws high-qual­ity func­tion plots in nor­mal or log­a­rith­mic scal­ing
-\IfFileExists{pgfplots.sty}{
-  \usepackage{pgfplots}
-  % EN: highest version supported by overleaf as of 2018-03-16
-  \pgfplotsset{compat=1.14}
-}{}
-
-
-% EN: pgfplotstable (optional if the ppackage is installed)
-%     PGFPlots generates tables from csv files
-\IfFileExists{pgfplotstable.sty}{
-  \usepackage{pgfplotstable}
-}{}
-
-
-% EN: Package for creating graphics programmatically
-\usepackage{tikz}
-
-
-% EN: Package for creating uml diagramms
-\usepackage{tikz-uml}
-
-
 % EN: Forest: apgf/TikZ-based package for drawing linguistic trees - https://ctan.org/pkg/forest
 \usepackage{forest}
-
-
-% EN: Enable PlantUML listings in the environment "plantuml"
-\IfFileExists{plantuml.sty}{
-  \usepackage[output=latex]{plantuml}
-}{}
-
 
 % EN: Layout: bottoms of pages not aligned to each other
 % DE: Der untere Rand darf "flattern"
@@ -1243,3 +1161,5 @@
 \ifdeutsch
   \setlength{\emergencystretch}{3em} % Silbentrennung reduzieren durch mehr frei Raum zwischen den Worten
 \fi
+
+\usepackage{bookmark}
