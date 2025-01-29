@@ -224,6 +224,10 @@
     \cczero
 }%
 
+\gdef\@labelCopyrightNDA{
+    This work is part of a non-disclosure agreement.
+}%
+
 % set \@labelCopyright if matched
 \newcommand{\USCCover@setCopyright}{
     \gdef\@labelCopyright{\MCS@copyright}
@@ -233,6 +237,7 @@
     \def\0{ccbysa}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCopyright{\@labelCopyrightCCSA}}{}
     \def\0{ccbynosa}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCopyright{\@labelCopyrightCCNoSA}}{}
     \def\0{cc0}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCopyright{\@labelCopyrightCCZERO}}{}
+    \def\0{nda}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCopyright{\@labelCopyrightNDA}}{}
     \def\0{none}\ifthenelse{\equal{\0}{\1}}{\gdef\@labelCopyright{}}{}
 }
 
