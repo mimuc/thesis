@@ -19,11 +19,12 @@
   supervisor={Dipl.-Inf.\ Roman Tiker,\\Dipl.-Inf.\ Laura Stern,\\Otto Normalverbraucher,\ M.Sc.},
   startdate={July 5, 2018},
   enddate={January 5, 2019},
-  copyright=ccbysa, % ccbysa, ccbynosa, cc0, none
+  copyright=ccbysa, % ccbysa, ccbynosa, cc0, nda, none
   language=english
 ]{lmu-thesis-cover}
 
 \input{acronyms}
+
 \makenoidxglossaries
 
 %\makeindex
@@ -129,10 +130,11 @@
 \fi
 
 % Control Glossary
-\let\ifglossary\iffalse
+\let\ifglossary\iftrue
 \ifglossary
   \printnoidxglossaries
 \fi
+\printnoidxglossary[type=acronym]
 
 \iftex4ht
 \else
