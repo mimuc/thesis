@@ -62,6 +62,10 @@
 \DeclareStringOption[german]{language}
 \DeclareBoolOption[false]{setPageNumberToOne}
 \DeclareBoolOption[false]{setCoverPageNumberToMinusOne}
+\DeclareBoolOption[false]{aids}
+\DeclareStringOption[aid tools not set]{aidstools}
+\DeclareStringOption[aid contributions not set]{adiscontributions}
+\DeclareStringOption[extra aid contributions not set]{aidsextracontributions}
 
 % ------------------------------
 % process options
@@ -104,6 +108,12 @@
     \gdef\@labelCourseSimTech{Simulation Technology}%
     \gdef\@labelCourseMedInf{Medieninformatik}%
 
+    \gdef\@labelAids{Used Aids}%
+    \gdef\@AidsTextFirst{During the preparation of this work, the author used }%
+    \gdef\@AidsTextSecond{in order to:}%
+    \gdef\@AidsTextThrid{After using this tool/service, the author reviewed and edited the content as needed and take(s) full responsibility for the thesis’s content.}%
+    \gdef\@AidsTextNone{During the preparation of this work, the author used no aids.}%
+    
     \gdef\@labelAffirmation{Affidavit}%
     \gdef\@AffirmationText{%
         I hereby declare under oath that I have written this work independently and only with the aids specified. All passages that I have taken from literature or other sources have been clearly marked as quotations with reference to the source.
@@ -138,10 +148,16 @@
     \gdef\@labelCourseSimTech{Simulation Technology}%
     \gdef\@labelCourseMedInf{Medieninformatik}%
 
+    \gdef\@labelAids{Benutzte Hilfsmittel}%
+    \gdef\@AidsTextFirst{Bei der Vorbereitung dieser Arbeit verwendete der/die Autor/in }%
+    \gdef\@AidsTextSecond{für}%
+    \gdef\@AidsTextThrid{Nach der Verwendung dieses Tools/Dienstes hat der/die Autor/in den Inhalt überprüft und bei Bedarf bearbeitet und übernimmt die volle Verantwortung für den Inhalt der Veröffentlichung.}%
+    \gdef\@AidsTextNone{Bei der Erstellung dieser Arbeit verwendete der/die Autor/in keinerlei Hilfsmittel.}%
+
     \gdef\@labelAffirmation{Eidesstattliche Versicherung}%
     \gdef\@AffirmationText{%
         Hiermit versichere ich an Eides statt, dass ich die vorliegende Arbeit selbständig und nur mit den angegebenen Hilfsmitteln verfasst habe. Alle Passagen, die ich aus der Literatur oder aus anderen Quellen übernommen habe, habe ich deutlich als Zitat mit Angabe der Quelle kenntlich gemacht. 
-        DDas elektronische Exemplar stimmt mit allen eingereichten Exemplaren überein.
+        Das elektronische Exemplar stimmt mit allen eingereichten Exemplaren überein.
     }
     \gdef\@labelSignature{\ Ort, Datum, Unterschrift}
 }
@@ -369,7 +385,9 @@
     \endgroup
 }
 
-\newcommand{\Affirmation}{
+\newcommand{\Aids}{
+    \pagestyle{empty}
+    \renewcommand*{\chapterpagestyle}{empty}
     \cleardoublepage
     \providecommand{\USCCover@isTwoColumn}{}
     \if@twocolumn \renewcommand{\USCCover@isTwoColumn}{true} \onecolumn
@@ -378,7 +396,36 @@
     \vskip 5cm\relax
     \begin{center}
         \begin{minipage}[t]{10cm}
-            \hbox{\textbf{\@labelAffirmation}}%
+            
+            \hbox{
+            \huge \textsf{\textbf{\@labelAids}}}%
+            \vskip 1cm\relax
+            \ifthenelse{\boolean{MCS@aids}}{
+                \@AidsTextFirst \MCS@aidstools~\@AidsTextSecond ~\MCS@adiscontributions. \MCS@aidsextracontributions~\@AidsTextThrid
+            }{\@AidsTextNone}
+            \vskip 4cm\relax
+            \hrulefill
+            \vskip .4\baselineskip
+            \hbox{\textsf{\@labelSignature}}
+        \end{minipage}
+    \end{center}
+    \clearpage
+    \providecommand{\USCCover@true}{true}
+    \ifthenelse{\equal{\USCCover@isTwoColumn}{\USCCover@true}}{\twocolumn}{}
+}
+
+\newcommand{\Affirmation}{
+    \pagestyle{empty}
+    \renewcommand*{\chapterpagestyle}{empty}
+    \cleardoublepage
+    \providecommand{\USCCover@isTwoColumn}{}
+    \if@twocolumn \renewcommand{\USCCover@isTwoColumn}{true} \onecolumn
+        \else \renewcommand{\USCCover@isTwoColumn}{false} \fi
+    \null
+    \vskip 5cm\relax
+    \begin{center}
+        \begin{minipage}[t]{10cm}
+            \hbox{\huge \textsf{\textbf{\@labelAffirmation}}}%
             \vskip 1cm\relax
             %\begin{flushleft}%
             \@AffirmationText
@@ -386,7 +433,7 @@
             \vskip 4cm\relax
             \hrulefill
             \vskip .4\baselineskip
-            \hbox{\@labelSignature}
+            \hbox{\textsf{\@labelSignature}}
         \end{minipage}
     \end{center}
     \clearpage

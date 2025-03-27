@@ -20,14 +20,17 @@
   startdate={July 5, 2018},
   enddate={January 5, 2019},
   copyright=ccbysa, % ccbysa, ccbynosa, cc0, nda, none
-  language=english
+  language=english,
+  aids=true, % Spefici if you used any aids in the crated of the thesis, if yes [true] if no adis were used [false]
+  % Next, enter which tools were used and how according to the following taxonomy (https://ceur-ws.org/GenAI/Taxonomy.html). If no aid was used, the next three values can be ignored.
+  aidstools={Gammerly, ChatGPT}, 
+  adiscontributions={Grammar and spelling check, Paraphrase and reword},
+  aidsextracontributions={Dall-E 2 was used to generate Figure X. }
 ]{lmu-thesis-cover}
 
 \input{acronyms}
 
 \makenoidxglossaries
-
-%\makeindex
 
 \begin{document}
 
@@ -132,16 +135,18 @@
 % Control Glossary
 \let\ifglossary\iftrue
 \ifglossary
-  \printnoidxglossaries
+    \ifdeutsch
+        \printnoidxglossary[type=\acronymtype, title=Abkürzungsverzeichnis]
+    \else
+        \printnoidxglossary[type=\acronymtype, title=List of Acronyms]
+    \fi
 \fi
-\printnoidxglossary[type=acronym]
 
 \iftex4ht
 \else
   %Optischen Randausgleich und Grauwertkorrektur wieder aktivieren
   \microtypesetup{protrusion=true}
 \fi
-
 % END: Verzeichnisse
 
 
@@ -170,8 +175,8 @@ All links were last followed on \today{}.
 \appendix
 \input{latexhints/latexhints-english}
 
-\pagestyle{empty}
-\renewcommand*{\chapterpagestyle}{empty}
+\Aids
+
 \Affirmation
 %TC:endignore
 \end{document}
