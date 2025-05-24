@@ -533,7 +533,7 @@
 % DE: Ermoeglicht es, Abbildungen um 90 Grad zu drehen
 %     Alternatives Paket: rotating Allerdings wird hier nur das Bild gedreht, während bei lscape auch die PDF-Seite gedreht wird.
 %     Das Paket lscape dreht die Seite auch nicht
-\usepackage{pdflscape}
+%\usepackage{pdflscape}
 
 
 % EN: Required for proper environments of fancyvrb and lstlistings
@@ -1043,17 +1043,21 @@
 
 % EN: Provides todo notes
 % DE: schoene TODOs
-\ifdeutsch
-  \usepackage[colorinlistoftodos,ngerman]{todonotes}
-\else
-  \usepackage[colorinlistoftodos]{todonotes}
-\fi
-\setlength{\marginparwidth}{2,5cm}
-
-\let\xtodo\todo
-\renewcommand{\todo}[1]{\xtodo[inline,color=black!5]{#1}}
-\newcommand{\utodo}[1]{\xtodo[inline,color=green!5]{#1}}
-\newcommand{\itodo}[1]{\xtodo[inline]{#1}}
+% Removed due to the use of TikZ, which is a heavy package.
+% \ifdeutsch
+%   \usepackage[colorinlistoftodos,ngerman]{todonotes}
+% \else
+%   \usepackage[colorinlistoftodos]{todonotes}
+% \fi
+% \setlength{\marginparwidth}{2,5cm}
+% \usepackage{todo}
+% \let\xtodo\todo
+% \renewcommand{\todo}[1]{\xtodo[inline,color=black!5]{#1}}
+% \newcommand{\utodo}[1]{\xtodo[inline,color=green!5]{#1}}
+% \newcommand{\itodo}[1]{\xtodo[inline]{#1}}
+\definecolor{lightgrey}{rgb}{0.925, 0.925, 0.925}
+\newcommand{\todo}[1]{\texttt{\colorbox{lightgrey}{\textcolor{red}{TODO: #1}}}\newline}
+\newcommand{\itodo}[1]{\texttt{\colorbox{lightgrey}{\textcolor{red}{TODO: #1}}}}
 
 
 % EN: Enable footnotes in tables.
@@ -1067,7 +1071,7 @@
 
 
 % EN: Forest: apgf/TikZ-based package for drawing linguistic trees - https://ctan.org/pkg/forest
-\usepackage{forest}
+%\usepackage{forest}
 
 % EN: Layout: bottoms of pages not aligned to each other
 % DE: Der untere Rand darf "flattern"
@@ -1119,7 +1123,7 @@
 
 
 % EN: Higher compression of the output PDF
-\pdfcompresslevel=9
+%\pdfcompresslevel=9
 
 
 % EN: Required for recent version of komascript, as some packges are not that compatible with KOMAScript as they should be
@@ -1129,7 +1133,7 @@
 
 
 % EN: Provide tables over multiple pages
-\usepackage{longtable}
+%\usepackage{longtable}
 
 
 % EN: Show LaTeX commands and their results in the document
