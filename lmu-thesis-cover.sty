@@ -443,7 +443,7 @@
 
 \newcommand{\charactercount}[1]{
 \immediate\write18{
-    expr `texcount -1 -sum -merge #1.tex` + `texcount -1 -sum -merge -char #1.tex` - 1 
+    expr `texcount -1 -sum -merge #1.tex` + `texcount -1 -sum -merge -char-only #1.tex` - 1 
     > chars.txt
 }\input{chars.txt}}
 
