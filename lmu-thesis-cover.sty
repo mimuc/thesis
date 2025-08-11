@@ -441,11 +441,10 @@
     \ifthenelse{\equal{\USCCover@isTwoColumn}{\USCCover@true}}{\twocolumn}{}
 }
 
-\newcommand{\charactercount}[1]{
-\immediate\write18{
-    expr `texcount -1 -sum -merge #1.tex` + `texcount -1 -sum -merge -char-only #1.tex` - 1 
-    > chars.txt
-}\input{chars.txt}}
+\newcommand{\charactercount}[1]{%
+  \immediate\write18{texcount -1 -sum -merge -char-only #1.tex > .charcount.txt}%
+  \input{.charcount.txt}%
+}
 
 \newcommand{\Copyright}
 {
@@ -457,7 +456,7 @@
     \@labelCopyright\\
     \vspace{1em}
     Typesetting: PDF-\LaTeXe{}\\
-    Character Count: \charactercount{content}
+    Character Count (excluding spaces): \charactercount{content}
     \thispagestyle{empty}
     \newpage
     \justifying
